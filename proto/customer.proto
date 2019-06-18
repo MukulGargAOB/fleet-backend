@@ -1,0 +1,126 @@
+syntax = "proto3";
+
+package proto;
+
+import "common.proto";
+
+option go_package = "fleet-backend/customer-service/proto";
+
+
+service customerService {
+
+    // Drivers
+    rpc SignUp(SignUpRequest) returns (DriverResponse) {}
+    rpc CreateDriver(Driver) returns (DriverResponse) {}
+    rpc UpdateDriver(Driver) returns (DriverResponse) {}
+    rpc GetDriverById(IdRequest) returns (DriverResponse) {}
+    rpc GetDriversByFleetCompanyId(IdRequest) returns (DriversResponse) {}
+
+    // Corporation
+    rpc CreateCorporation(Corporation) returns (CorporationResponse) {}
+    rpc GetAllCorporationsByFleetCompanyId(IdRequest) returns (CorporationsResponse) {}
+    rpc GetCorporationById(IdRequest) returns (CorporationResponse) {}
+
+    // Regions
+      rpc CreateRegion(Region) returns (RegionResponse) {}
+      rpc GetAllRegionsByCorporationId(IdRequest) returns (RegionsResponse) {}
+      rpc GetRegionById(IdRequest) returns (RegionResponse) {}
+
+    // District
+    rpc CreateDistrict(District) returns (DistrictResponse) {}
+    rpc GetAllDistrictsByRegionId(IdRequest) returns (DistrictsResponse) {}
+    rpc GetDistrictById(IdRequest) returns (DistrictResponse) {}
+
+    // Location
+    rpc CreateLocation(Location) returns (LocationResponse) {}
+    rpc GetAllLocationsByDistrictId(IdRequest) returns (LocationsResponse) {}
+    rpc GetLocationById(IdRequest) returns (LocationResponse) {}
+}
+
+message SignUpRequest {
+    string fleetCompanyName = 1;
+    string name  = 2;
+    string email = 3;
+    string password = 4;
+}
+
+message FleetCompany {
+    string id = 1;
+    string name = 2;
+}
+
+message Driver {
+    string id = 1;
+    string name = 2;
+    string email = 3;
+    string password = 4;
+    string fleetCompanyId = 5;
+}
+
+message DriverResponse {
+    Driver driver = 1;
+}
+
+message DriversResponse {
+    repeated Driver drivers = 1;
+}
+
+message Corporation {
+    string id = 1;
+    string name = 2;
+    string fleetCompanyId = 3;
+}
+
+message CorporationResponse {
+    Corporation corporation = 1;
+}
+
+message CorporationsResponse {
+    repeated Corporation corporations = 1;
+}
+
+message Region {
+    string id = 1;
+    string name = 2;
+    string corporationId = 3;
+}
+
+message RegionResponse{
+    Region region = 1;
+}
+
+message RegionsResponse{
+    repeated Region regions = 1;
+}
+
+message District {
+    string id = 1;
+    string name = 2;
+    string regionId = 3;
+}
+
+message DistrictResponse {
+    District district = 1;
+}
+
+message DistrictsResponse {
+    repeated District districts = 1;
+}
+
+message Location {
+    string id = 1;
+    string name = 2;
+    string districtId = 3;
+}
+
+message LocationResponse {
+    Location location = 1;
+}
+
+
+message LocationsResponse{
+    repeated Location locations = 1;
+}
+
+
+

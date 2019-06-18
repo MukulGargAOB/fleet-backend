@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package proto;
+
+import "common.proto";
+
+option go_package = "fleet-backend/truck-service/proto";
+
+
+
+service truckService{
+
+    rpc CreateTruck(Truck) returns (TruckResponse) {}
+    rpc UpdateTruck(Truck) returns (TruckResponse) {}
+    rpc GetTruckById(IdRequest) returns (TruckResponse) {}
+    rpc GetAllTrucksByFleetCompanyId(IdRequest) returns (TrucksResponse) {}
+    rpc ClockIn(ClockOperation) returns (TruckResponse) {}
+    rpc ClockOut(ClockOperation) returns (TruckResponse) {}
+}
+
+message Truck {
+    string id  = 1;
+    string licensePlate = 2;
+    string clockedInUser = 3;
+    float miles = 4;
+    string fleetCompanyId = 5;
+    string corporationId = 6;
+    string regionId = 7;
+    string districtId = 8;
+    string locationId = 9;
+}
+
+message TruckResponse {
+    Truck truck = 1;
+}
+
+message TrucksResponse {
+    repeated Truck trucks = 2;
+}
+
+message ClockOperation {
+    string driverId = 1;
+    string truckId = 2;
+}
+

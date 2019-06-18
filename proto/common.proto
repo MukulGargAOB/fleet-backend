@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "fleet-backend/common/proto";
+
+message IdRequest {
+    string id = 1;
+}
+
+message Empty {
+
+}
